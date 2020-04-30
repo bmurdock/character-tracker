@@ -1,6 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+/*
+
+    name,
+    characterClass,
+    level,
+    background,
+    playerName,
+    race,
+    alignment,
+    experience,
+
+*/
+
 const characterSchema = new Schema({
     name: {
         type: String,

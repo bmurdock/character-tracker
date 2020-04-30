@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const dbUri = require('./settings').DBURI;
+console.log('dbUri: ', dbUri);
 
 const dbOptions = {
     useUnifiedTopology: true,
@@ -10,6 +11,7 @@ const dbOptions = {
 };
 
 module.exports = function () {
+    console.log('dbUri: ', dbUri);
     mongoose.connect(dbUri, dbOptions);
 
     mongoose.connection.on('connected', () => {

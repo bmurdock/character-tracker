@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const characterSchema = require('../models/characters.model');
 
 // CRUD stands for CREATE, READ, UPDATE, DELETE
-characterSchema.static = {
+characterSchema.statics = {
     create: function (data, callback) {
         const character = new this(data);
         character.save(callback);
