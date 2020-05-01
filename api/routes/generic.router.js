@@ -1,11 +1,14 @@
 const express = require('express');
-module.exports = function (Model, modelKey) {
+module.exports = function (Model) {
     // create new express router
+    const modelKey = Model.modelName.toLowerCase();
     const router = express.Router();
-    router.get(`/api/${modelKey}/`, Model.getAll);
-    router.get(`/api/${modelKey}/:id`, Model.getById);
-    router.post(`/api/${modelKey}/`, Model.create);
-    router.delete(`/api/${modelKey}/:id`, Model.delete);
-    router.put(`/api/${modelKey}/:id`, Model.update);
+    const controller = require('../controllers/generic.controller');
+    const ctrl = controller(Model);
+    router.get(`/api/${modelKey}/`, ctrl.getAll);
+    router.get(`/api/${modelKey}/:id`, ctrl.getById);
+    router.post(`/api/${modelKey}/`, ctrl.create);
+    router.delete(`/api/${modelKey}/:id`, ctrl.delete);
+    router.put(`/api/${modelKey}/:id`, ctrl.update);
     return router;
 }

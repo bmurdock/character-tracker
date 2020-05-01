@@ -21,9 +21,10 @@ const characterSchema = new Schema({
         required: true,
     },
     characterClass: {
-        type: String,
+        type: Schema.Types.ObjectId,
         unique: false,
         required: true,
+        ref: 'Classes'
     },
     level: {
         type: Number,
@@ -41,9 +42,10 @@ const characterSchema = new Schema({
         required: true,
     },
     race: {
-        type: String,
+        type: Schema.Types.ObjectId,
         unique: false,
         required: true,
+        ref: 'Races',
     },
     alignment: {
         type: String,

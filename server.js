@@ -10,10 +10,22 @@ const db = require('./config/database');
 db();
 
 
-// import my route files
-//const characterRoutes = require('./api/routes/characters.routes');
+// import my generic generator files
 const routerGen = require('./api/routes/generic.router');
-const tempModel = require('./api/controllers/characters.controller');
+const modelGen = require('./api/dal/generic.dal');
+
+// import my schemas
+const charSchema = require('./api/models/characters.model');
+const raceSchema = require('./api/models/races.model');
+const classesSchema = require('./api/models/characterClasses.model');
+
+// create models for all of my schemas
+const Characters = modelGen('Characters', charSchema);
+const Races = modelGen('Races', raceSchema);
+const Classes = modelGen('Classes', classesSchema);
+
+
+
 const uiRoutes = require('./ui/routes/main.routes');
 
 // get constants from my settings file
@@ -36,9 +48,9 @@ const uiRouter = express.Router();
 
 
 // tell the app to use our api routes
-//app.use('/api', router);
-//characterRoutes(router);
-app.use('/', routerGen(tempModel, 'characters'));
+app.use('/', routerGen(Characters));
+app.use('/', routerGen(Races));
+app.use('/', routerGen(Classes));
 
 
 // tell the app to use ui routes
