@@ -11,7 +11,9 @@ db();
 
 
 // import my route files
-const characterRoutes = require('./api/routes/characters.routes');
+//const characterRoutes = require('./api/routes/characters.routes');
+const routerGen = require('./api/routes/generic.router');
+const tempModel = require('./api/controllers/characters.controller');
 const uiRoutes = require('./ui/routes/main.routes');
 
 // get constants from my settings file
@@ -34,9 +36,9 @@ const uiRouter = express.Router();
 
 
 // tell the app to use our api routes
-app.use('/api', router);
-
-characterRoutes(router);
+//app.use('/api', router);
+//characterRoutes(router);
+app.use('/', routerGen(tempModel, 'characters'));
 
 
 // tell the app to use ui routes

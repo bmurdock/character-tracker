@@ -8,7 +8,7 @@ function handleError(res, err) {
 }
 
 
-exports.createCharacter = function (req, res, next) {
+exports.create = function (req, res, next) {
     // i need to create a data structure (object)
     // that has all of the information from the request (req.body);
     Characters.create(req.body, function (err, character) {
@@ -32,6 +32,18 @@ exports.getAll = function (req, res, next) {
         res.json(results);
     });
 }
+exports.getById = function (req, res, next) {
+    const query = {
+        _id: req.params.id
+    };
+    Characters.get(query, (err, results) => {
+        if (err) {
+            handleError(res, err);
+            return;
+        }
+        res.json(results);
+    });
+}
 exports.getCharacter = function (req, res, next) {
     const query = {
         name: req.params.name
@@ -44,7 +56,7 @@ exports.getCharacter = function (req, res, next) {
         res.json(results);
     });
 }
-exports.updateCharacter = function (req, res, next) {
+exports.update = function (req, res, next) {
     const query = {
         _id: req.params.id
     };
@@ -59,7 +71,7 @@ exports.updateCharacter = function (req, res, next) {
         });
     });
 }
-exports.deleteCharacter = function (req, res, next) {
+exports.delete = function (req, res, next) {
     const query = {
         _id: req.params.id
     };
