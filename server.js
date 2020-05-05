@@ -1,5 +1,6 @@
 // npm packages that i want to import
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 
@@ -34,6 +35,7 @@ let {
 
 // define the app
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use(logger);
@@ -46,7 +48,6 @@ function logger(req, res, next) {
 // create express router object for the project
 const router = express.Router();
 const uiRouter = express.Router();
-
 
 // tell the app to use our api routes
 app.use('/', routerGen(Characters));
