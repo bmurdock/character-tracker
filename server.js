@@ -25,9 +25,6 @@ const Races = modelGen('Races', raceSchema);
 const Classes = modelGen('Classes', classesSchema);
 
 
-
-const uiRoutes = require('./ui/routes/main.routes');
-
 // get constants from my settings file
 let {
     PORT,
@@ -39,8 +36,12 @@ let {
 const app = express();
 app.use(express.json());
 
-// tell it to use ejs
-app.set('view engine', 'ejs');
+app.use(logger);
+
+function logger(req, res, next) {
+    console.log(`Incoming ${req.method} request to ${req.url}...`);
+    next();
+}
 
 // create express router object for the project
 const router = express.Router();
@@ -51,12 +52,6 @@ const uiRouter = express.Router();
 app.use('/', routerGen(Characters));
 app.use('/', routerGen(Races));
 app.use('/', routerGen(Classes));
-
-
-// tell the app to use ui routes
-app.use('/', uiRouter);
-uiRoutes(uiRouter);
-
 
 app.listen(PORT, () => {
     console.log(`${APPNAME} is listening on port ${PORT}...`);
